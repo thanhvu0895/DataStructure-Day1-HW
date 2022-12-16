@@ -1,4 +1,4 @@
-// O(nlogn)
+// O(n)
 import java.util.Arrays;
 
 public class LongestSamePrefix {
@@ -8,12 +8,25 @@ public class LongestSamePrefix {
 		System.out.println("The longest same prefix is: " + longestSamePrefix(input));
 	}
 	
-	public static String longestSamePrefix (String[] strings) {
-		  Arrays.sort(strings);
-		  for(int i = 0; i < Math.min(strings[0].length(), strings[strings.length-1].length()); i++) {
-		      if(strings[0].charAt(i) != strings[strings.length-1].charAt(i))
-		          return strings[0].substring(0, i);
-		  }
-		  return strings[0];
+	public static String longestSamePrefix (String[] strs) {
+		 // Find longest string
+		int maxLengthIndex = 0;
+		int minLengthIndex = 0;
+		for (int i = 0; i < strs.length; i++) {
+			if (maxLengthIndex < strs[i].length()) {
+				maxLengthIndex = i;
+			} else {
+				minLengthIndex = i;
+			}
+		}
+		
+
+		for (int i = 0; i < strs[minLengthIndex].length(); i++) {
+			if(strs[minLengthIndex].charAt(i) != strs[maxLengthIndex].charAt(i)) {
+				return strs[minLengthIndex].substring(0, i);
+			}
+			
+		}
+		return null;
 	}
 }
